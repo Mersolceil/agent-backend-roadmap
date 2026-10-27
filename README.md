@@ -2,6 +2,10 @@
 
 一份面向 Python 后端与 Agent 应用的交互式学习路线。按方向、模块、专题和学习单元逐层浏览，结合前置关系与项目验收点安排实践。
 
+![路线图首页：从能力方向进入具体学习单元](docs/roadmap-preview.jpg)
+
+覆盖 8 个方向、39 个模块、120 个专题和 367 个学习单元；侧边栏可进入某一方向，搜索框可跨方向查找具体知识。
+
 ## 主要功能
 
 - 分层知识网络、依赖关系、搜索和优先级筛选。
@@ -14,6 +18,8 @@
 需要 Python 3；项目运行时无需安装其他依赖。从仓库根目录执行：
 
 ```bash
+git clone https://github.com/Mersolceil/agent-backend-roadmap.git
+cd agent-backend-roadmap
 python3 -m http.server 8770 --bind 127.0.0.1 --directory dist
 ```
 
@@ -24,6 +30,16 @@ python3 -m http.server 8770 --bind 127.0.0.1 --directory dist
 - `dist/`：网站文件及可下载的路线与来源说明。
 - `research/knowledge-v1.json`：用于迁移与生成的早期知识数据。
 - `build_curriculum.py`：基于上述数据生成 `dist/knowledge.json`，并检查依赖与节点引用。更改数据后运行 `python3 build_curriculum.py`；下载版 Markdown 需根据修改同步维护。
+- `scripts/check.py`：检查数据关联、依赖环、网页资源、下载版内容及 JSON 是否可重建；在临时目录构建，不会覆盖当前文件。
+
+## 检查修改
+
+```bash
+python3 scripts/check.py
+node --check dist/app.js
+```
+
+第一条命令只需要 Python 3；第二条需要 Node.js。GitHub Actions 会在推送和拉取请求时运行相同检查。它们不能代替浏览器中的交互检查，也不验证外部资料是否仍然有效。
 
 ## 资料与范围
 
